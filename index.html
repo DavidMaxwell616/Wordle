@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/game.js" type="module"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<h1>WORDLE</h1> 
+<input type="text" id="1" />
+<input type="text" id="2" />
+<input type="text" id="3" />
+<input type="text" id="4" />
+<input type="text" id="5" /><br>
+<input type="text" id="6" />
+<input type="text" id="7" />
+<input type="text" id="8" />
+<input type="text" id="9" />
+<input type="text" id="10" /><br>
+<input type="text" id="11" />
+<input type="text" id="12" />
+<input type="text" id="13" />
+<input type="text" id="14" />
+<input type="text" id="15" /><br>
+<input type="text" id="16" />
+<input type="text" id="17" />
+<input type="text" id="18" />
+<input type="text" id="19" />
+<input type="text" id="20" /><br>
+<input type="text" id="21" />
+<input type="text" id="22" />
+<input type="text" id="23" />
+<input type="text" id="24" />
+<input type="text" id="25" /><br>
+<input type="text" id="26" />
+<input type="text" id="27" />
+<input type="text" id="28" />
+<input type="text" id="29" />
+<input type="text" id="30" /><p>
+<div id="keyboard">
+<button class="keyboard-button">q</button>
+<button class="keyboard-button">w</button>
+<button class="keyboard-button">e</button>
+<button class="keyboard-button">r</button>
+<button class="keyboard-button">t</button>
+<button class="keyboard-button">y</button>
+<button class="keyboard-button">u</button>
+<button class="keyboard-button">i</button>
+<button class="keyboard-button">o</button>
+<button class="keyboard-button">p</button><br>
+<button class="keyboard-button">a</button>
+<button class="keyboard-button">s</button>
+<button class="keyboard-button">d</button>
+<button class="keyboard-button">f</button>
+<button class="keyboard-button">g</button>
+<button class="keyboard-button">h</button>
+<button class="keyboard-button">j</button>
+<button class="keyboard-button">k</button>
+<button class="keyboard-button">l</button><br>
+<button class="keyboard-button">z</button>
+<button class="keyboard-button">x</button>
+<button class="keyboard-button">c</button>
+<button class="keyboard-button">v</button>
+<button class="keyboard-button">b</button>
+<button class="keyboard-button">n</button>
+<button class="keyboard-button">m</button>
+<button class="keyboard-button">Enter</button>
+<br>
+</div>
+<script>
+$(function() {
+    $('input').keyup(function() {
+        this.value = this.value.toUpperCase();
+    });
+});
+</script>
+</body>
+ </html>
