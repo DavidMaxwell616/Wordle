@@ -6,7 +6,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-<h1>WORDLE</h1> 
+<table>
+    <tr><th>
+    <div id="title">WORDLE</div> 
+    </th></tr>
+<tr>
+<td>
 <input type="text" id="1" />
 <input type="text" id="2" />
 <input type="text" id="3" />
@@ -67,6 +72,14 @@
 <button class="keyboard-button">Enter</button>
 <br>
 </div>
+</td>
+<td width="20"></td>
+<td>
+<div id="score"><h2>SCORE : </h2></div>
+<div id="highscore"><h2>HIGH SCORE : </h2></div>
+</td>
+</tr>
+</table>
 <script>
 $(function() {
     $('input').keyup(function() {
