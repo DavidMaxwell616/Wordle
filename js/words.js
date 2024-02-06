@@ -5315,7 +5315,6 @@ export const WORDS = [
     'gouts',
     'mynas',
     'mazer',
-    'kikes',
     'oxeye',
     'stoup',
     'jujus',
