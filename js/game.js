@@ -5,6 +5,9 @@ function StartGame(){
     word = WORDS[Math.floor(Math.random()*WORDS.length)].toUpperCase();
     console.log(word);
     id("1").focus();
+    for (let index = 0; index < word.length; index++) {
+        correctLetters[index]=false;
+    }
     correctLetters=0;
     updateScore();
     id("keyboard-cont").addEventListener("click", (e) => {
@@ -13,11 +16,12 @@ function StartGame(){
             return;
         }
         let key = target.textContent.toUpperCase();
-        id(column).value = key;
+        id(position).value = key;
         checkLetter(key,word[column-1]);
-        column++;
-        row=30 % column;
-        id(column).focus();
+        column<5 ? column++ : column=1;
+        position++;
+        row = position % 30;
+        id(position).focus();
         updateScore();
     });
     }
@@ -29,27 +33,31 @@ function StartGame(){
 function checkLetter(letter1,letter2){
     if(word.includes(letter1) && letter1!=letter2)
     {
-        $(id(column)).css('background',yellow);
+        $(id(position)).css('background',yellow);
         score += (5-row) * 10;   
     }
     if(letter1==letter2)
     {
-        $(id(column)).css('background',green);
-        correctLetters++;
-        score += (5-row) * 50;
-        if(correctLetters==5)
+        if(!correctLetters[column])
+        {
+            $(id(position)).css('background',green);
+            correctLetters[column] = true;
+            score += (5-row) * 50;
+            if(correctLetters.every())
             {
                 window.alert("YOU WON!!");
                 if (score>highScore)
                     highScore = score;
                 ClearBoard();
                 StartGame();
-            }   
+            }
+        }   
     }
 }
 
-    $(document).ready(function(){
-        $('input').on('focusout',function(){ 
+    //$(document).ready(function(){
+     //   $('input').on('focusout',function(){ 
+      //      return false;
         //     var letter = $(this).val().toLowerCase();
         //     let index = word.lastIndexOf(letter)+1;
         //     console.log(letter);
@@ -78,8 +86,8 @@ function checkLetter(letter1,letter2){
         //         }
         //     }
         //     updateScore();
-         });
-  });
+    //     });
+ // });
 
 
 function updateScore(){
