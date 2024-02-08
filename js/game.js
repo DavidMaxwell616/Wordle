@@ -4,11 +4,12 @@ import { WORDS } from "./words.js";
 function StartGame(){
     word = WORDS[Math.floor(Math.random()*WORDS.length)].toUpperCase();
     console.log(word);
-    id("1").focus();
+    position = column = row = 1;
+    guessedLetters = 0;
+    id(position).focus();
     for (let index = 0; index < word.length; index++) {
         correctLetters[index]=false;
     }
-    correctLetters=0;
     updateScore();
     id("keyboard-cont").addEventListener("click", (e) => {
         const target = e.target;
@@ -17,6 +18,7 @@ function StartGame(){
         }
         let key = target.textContent.toUpperCase();
         id(position).value = key;
+        guessedLetters++;
         checkLetter(key,word[column-1]);
         column<5 ? column++ : column=1;
         position++;
@@ -24,11 +26,15 @@ function StartGame(){
         id(position).focus();
         updateScore();
     });
-    }
+}
 
-    function ClearBoard(){
-        console.log('clearing board');
+function ResetGame(){
+    id("resetButton").style.display = "none";
+    for (let index = 1; index < position; index++) {
+        id(index).value = "";
+        $(id(position)).css('background',grey);
     }
+}
 
 function checkLetter(letter1,letter2){
     if(word.includes(letter1) && letter1!=letter2)
@@ -38,56 +44,38 @@ function checkLetter(letter1,letter2){
     }
     if(letter1==letter2)
     {
-        if(!correctLetters[column])
+        $(id(position)).css('background',green);
+        if(!correctLetters[column-1])
         {
-            $(id(position)).css('background',green);
-            correctLetters[column] = true;
+            correctLetters[column-1] = true;
             score += (5-row) * 50;
-            if(correctLetters.every())
+            if(correctLetters.every(v => v === true))
             {
-                window.alert("YOU WON!!");
+                id("message").innerHTML = "<H2>YOU WON!!</H2>";
                 if (score>highScore)
                     highScore = score;
-                ClearBoard();
-                StartGame();
+                id("resetButton").style.display = "block";
+                return;
             }
         }   
     }
+    if(guessedLetters==30)
+    {
+        id("message").innerHTML = "<H2>YOU RAN OUT OF GUESSES!!</H2>";
+        if (score>highScore)
+            highScore = score;
+        id("resetButton").style.display = "block";
+    }
 }
 
-    //$(document).ready(function(){
-     //   $('input').on('focusout',function(){ 
-      //      return false;
-        //     var letter = $(this).val().toLowerCase();
-        //     let index = word.lastIndexOf(letter)+1;
-        //     console.log(letter);
-        //     if(word.includes(letter)){
-        //          if(index==this.id % 5)
-        //         {
-        //             $(this).css('background',green);
-        //             correctLetters++;
-        //             guessedLetters.push(letter);
-        //             if(!guessedLetters.includes(letter))
-        //             score += (5-row) * 50;
-        //             if(correctLetters==5)
-        //             {
-        //                 window.alert("YOU WON!!");
-        //                 if (score>highScore)
-        //                     highScore = score;
-        //                 ClearBoard();
-        //                 StartGame();
-        //             }
-        //         }
-        //         else
-        //         {
-        //             $(this).css('background',yellow);
-        //             if(!guessedLetters.includes(letter))
-        //                 score += (5-row) * 10;
-        //         }
-        //     }
-        //     updateScore();
-    //     });
- // });
+$(document).ready(function(){
+    $('input').on('keydown',function(e){ 
+        e.preventDefault();
+    });
+    var button = id("resetButton");
+    button.style.display = "none";
+    button.addEventListener("click", ResetGame);
+ });
 
 
 function updateScore(){
